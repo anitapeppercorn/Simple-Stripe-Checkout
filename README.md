@@ -24,3 +24,9 @@ example PRICE=price_1HiPxg2eZvKYlo2C5g3rIPkx
 example STRIPE_PUBLISHABLE_KEY="pk_test_TYooMQauvdEDq54NiTphI7jx"
 
 example STRIPE_SECRET_KEY="sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+
+
+MIT license and original authored by Credits
+
+Author: @thorsten-stripe
+This project was bootstrapped with Create React App.
