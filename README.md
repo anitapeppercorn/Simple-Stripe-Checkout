@@ -3,6 +3,8 @@ Simple-Stripe-Checkout
 Simple Stripe Checkout Demo using react. leveraged from Stripe original documentations and further simplified.
 
 This is Tested and deployed on Heroku and works. 
+https://heroku-stripe-simple.herokuapp.com/
+
 To try, clone repo and setup a .env in /server folder and include items below.
 npm i and npm start in directory ..
 
