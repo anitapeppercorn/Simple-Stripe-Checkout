@@ -6,6 +6,7 @@ This is Tested and deployed on Heroku and works.
 https://heroku-stripe-simple.herokuapp.com/
 
 To try, clone repo and setup a .env in /server folder and include items below.
+visit this site to generate your stripe API key - https://stripe.com/docs/keys
 npm i and npm start in directory ..
 
 ``` text 
