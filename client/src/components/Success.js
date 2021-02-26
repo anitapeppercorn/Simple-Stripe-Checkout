@@ -16,7 +16,8 @@ const Success = () => {
     }
     fetchSession();
   }, [sessionId]);
-
+  
+  setTimeout(function(){window.location.assign('/')} , 3000);
   return (
     <div className="sr-root">
       <div className="sr-main">
@@ -31,7 +32,7 @@ const Success = () => {
           <div className="sr-callout">
             <pre>{JSON.stringify(session, null, 2)}</pre>
           </div>
-          <Link to="/">Return to FANTINDER</Link>
+          <Link to="/">Return to HOME</Link>
         </div>
       </div>
       <div className="sr-content">
