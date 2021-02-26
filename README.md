@@ -1,11 +1,14 @@
 Simple-Stripe-Checkout
 
-Simple Stripe Checkout Demo using react. leveraged from strip original documentations and simplified
+Simple Stripe Checkout Demo using react. leveraged from Stripe original documentations and further simplified.
 
-Tested and works. Concurrently not set up so you have to npm start client and server side separately. .env should be in /server folder and include
+This is Tested and deployed on Heroku and works. 
+To try, clone repo and setup a .env in /server folder and include items below.
+npm i and npm start in directory ..
 
 ``` text 
-DOMAIN="http://localhost:3000"
+DOMAIN="http://localhost:3000" 
+//(in production this will be the url)
 
 PAYMENT_METHODS="card"
 
@@ -26,7 +29,5 @@ example STRIPE_PUBLISHABLE_KEY="pk_test_TYooMQauvdEDq54NiTphI7jx"
 example STRIPE_SECRET_KEY="sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 
 
-MIT license and original authored by Credits
-
-Author: @thorsten-stripe
+MIT license and original authored by @thorsten-stripe
 This project was bootstrapped with Create React App.
