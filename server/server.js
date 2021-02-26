@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const { resolve } = require('path');
-// Copy the .env.example in the root into a .env file in this folder
+// Create a .env file in this same folder
 require('dotenv').config({ path: './.env' });
-
+const PORT = process.env.PORT || 4242;
 // Ensure environment variables are set.
 checkEnv();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const domainURL = process.env.DOMAIN;
 
 app.use(express.static(process.env.STATIC_DIR));
 app.use(
@@ -23,6 +24,18 @@ app.use(
 );
 
 app.get('/', (req, res) => {
+  const path = resolve(process.env.STATIC_DIR + '/index.html');
+  res.sendFile(path);
+});
+console.log(process.env.STATIC_DIR);
+
+
+app.get('/success', (req, res) => {
+  const path = resolve(process.env.STATIC_DIR + '/index.html');
+  res.sendFile(path);
+});
+
+app.get('/canceled', (req, res) => {
   const path = resolve(process.env.STATIC_DIR + '/index.html');
   res.sendFile(path);
 });
@@ -45,7 +58,7 @@ app.get('/checkout-session', async (req, res) => {
 });
 
 app.post('/create-checkout-session', async (req, res) => {
-  const domainURL = process.env.DOMAIN;
+//  const domainURL = process.env.DOMAIN;
 
   const { quantity, locale } = req.body;
   // Create new Checkout Session for the order
@@ -54,7 +67,7 @@ app.post('/create-checkout-session', async (req, res) => {
   // [customer] - if you have an existing Stripe Customer ID
   // [customer_email] - lets you prefill the email input in the Checkout page
   // For full details see https://stripe.com/docs/api/checkout/sessions/create
-  console.log(`${domainURL}/success.html?session_id=cs_test_MzidyYdDKNmrrZlP4yO2UsR5HBXmp5eJWlxcaXNFBqlEI7JafmJVkpVH`)
+  
   const session = await stripe.checkout.sessions.create({
     payment_method_types: process.env.PAYMENT_METHODS.split(', '),
     mode: 'payment',
@@ -67,12 +80,12 @@ app.post('/create-checkout-session', async (req, res) => {
     ],
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
     //?session_id={CHECKOUT_SESSION_ID}`, add if checking session ID
-    //success_url: `${domainURL}/success.html`,
-    
-    success_url: `${domainURL}/success.html?session_id=cs_test_MzidyYdDKNmrrZlP4yO2UsR5HBXmp5eJWlxcaXNFBqlEI7JafmJVkpVH`,
+    //success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${domainURL}/success/?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${domainURL}/canceled.html`,
   });
-
+  console.log(`${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`);
+  
   res.send({
     sessionId: session.id,
   });
@@ -115,8 +128,7 @@ app.post('/webhook', async (req, res) => {
   res.sendStatus(200);
 });
 
-app.listen(4242, () => console.log(`Node server listening on port ${4242}!`));
-
+app.listen(PORT, () => console.log(`Node server listening on port ${PORT}!`));
 
 function checkEnv() {
   const price = process.env.PRICE;
